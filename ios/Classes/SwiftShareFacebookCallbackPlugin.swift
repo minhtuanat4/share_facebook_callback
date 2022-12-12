@@ -33,7 +33,7 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
             shareLinksFacebook(withQuote: shareQuote, withUrl: shareUrl)
             break
           case "ShareType.sharePhotoFacebook":
-            // sharePhotoFacebook(imageUrl, quote, result)
+            sharePhoto()
             break
           default:
             self.result?("Method not implemented")
@@ -77,4 +77,44 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
                     shareDialog.show()
         }
   }
+  private func sharePhoto() {
+        guard !isSimulator else {
+            presentAlert(
+                title: "Error",
+                message: "Sharing an image will not work on a simulator. Please build to a device and try again."
+            )
+            return
+        }
+
+        guard let image = UIImage(named: "puppy") else {
+            presentAlert(
+                title: "Invalid image",
+                message: "Could not find image to share"
+            )
+            return
+        }
+
+        let photo = SharePhoto(image: image, isUserGenerated: true)
+        let content = SharePhotoContent()
+        content.photos = [photo]
+
+        let dialog = self.dialog(withContent: content)
+
+        // Recommended to validate before trying to display the dialog
+        do {
+            try dialog.validate()
+        } catch {
+            presentAlert(for: error)
+        }
+
+        dialog.show()
+    }
+
+    private func dialog(withContent content: SharingContent) -> ShareDialog {
+        return ShareDialog(
+            viewController: self,
+            content: content,
+            delegate: self
+        )
+    }
 }

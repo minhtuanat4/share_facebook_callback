@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     String shareFaceStatus;
     try {
       shareFaceStatus = await _shareFacebookCallbackPlugin.shareFacebook(
-              type: ShareType.shareLinksFacebook,
+              type: ShareType.sharePhotoFacebook,
               url: 'https://vtcpay.vn/',
               quote: 'Happy new year',
               imageUrl: 'example/assets/images/image001.jpeg') ??
