@@ -1,0 +1,6 @@
+<resources>
+    <!--
+        On the Dashboard, navigate to Settings > Basic > App ID.
+    -->
+    <string name="facebook_app_id">892897901876783</string>
+</resources>
