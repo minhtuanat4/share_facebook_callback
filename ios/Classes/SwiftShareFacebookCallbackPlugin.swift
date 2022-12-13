@@ -1,7 +1,6 @@
 import Flutter
 import UIKit
 import FBSDKShareKit
-import PhotosUI
 
 public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingDelegate{
 
@@ -33,7 +32,7 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
             shareLinksFacebook(withQuote: shareQuote, withUrl: shareUrl)
             break
           case "ShareType.sharePhotoFacebook":
-            sharePhoto()
+            // sharePhoto()
             break
           default:
             self.result?("Method not implemented")
@@ -43,6 +42,7 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
       }
     }
   }
+
 
    public func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
       NSLog("--------------------success")
@@ -58,6 +58,19 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
       NSLog("-----------------onCancel");
       self.result?("cancel")
     }
+
+    // func shareLink() {
+    //     guard let url = URL(string: "https://newsroom.fb.com/") else {
+    //         preconditionFailure("URL is invalid")
+    //     }
+
+    //     let content = ShareLinkContent()
+    //     content.contentURL = url
+    //     content.hashtag = Hashtag("#bestSharingSampleEver")
+
+    //     dialog(withContent: content).show()
+    // }
+
 
   private func shareLinksFacebook(withQuote quote: String?, withUrl urlString: String?){
     DispatchQueue.main.async {
@@ -77,44 +90,4 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
                     shareDialog.show()
         }
   }
-  private func sharePhoto() {
-        guard !isSimulator else {
-            presentAlert(
-                title: "Error",
-                message: "Sharing an image will not work on a simulator. Please build to a device and try again."
-            )
-            return
-        }
-
-        guard let image = UIImage(named: "puppy") else {
-            presentAlert(
-                title: "Invalid image",
-                message: "Could not find image to share"
-            )
-            return
-        }
-
-        let photo = SharePhoto(image: image, isUserGenerated: true)
-        let content = SharePhotoContent()
-        content.photos = [photo]
-
-        let dialog = self.dialog(withContent: content)
-
-        // Recommended to validate before trying to display the dialog
-        do {
-            try dialog.validate()
-        } catch {
-            presentAlert(for: error)
-        }
-
-        dialog.show()
-    }
-
-    private func dialog(withContent content: SharingContent) -> ShareDialog {
-        return ShareDialog(
-            viewController: self,
-            content: content,
-            delegate: self
-        )
-    }
 }

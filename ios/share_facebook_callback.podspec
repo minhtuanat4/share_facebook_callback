@@ -17,6 +17,7 @@ A new Flutter plugin project.
   s.dependency 'Flutter'
   s.dependency 'FBSDKShareKit'
   s.dependency 'FBSDKCoreKit' 
+  s.dependency 'FBSDKLoginKit' 
   s.platform = :ios, '9.0'
 
   # Flutter.framework does not contain a i386 slice.
