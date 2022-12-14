@@ -16,11 +16,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
   final _shareFacebookCallbackPlugin = ShareFacebookCallback();
 
-  String _facebookIsSuccessed = '';
-
+  String _platformVersion = 'Unknown';
+  String _shareFaceStatus = 'Unknow status';
   @override
   void initState() {
     super.initState();
@@ -51,20 +50,22 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> shareFacebook(String url, String msg) async {
+    String shareFaceStatus;
+
     try {
-      _facebookIsSuccessed = await _shareFacebookCallbackPlugin.shareFacebook(
-              type: ShareType.shareLinksFacebook,
-              url: 'https://vtcpay.vn/',
-              quote: 'Happy new year',
-              imageUrl: 'example/assets/images/image001.jpeg') ??
-          '';
-      print(' ShareFacebook ' + _facebookIsSuccessed);
+      shareFaceStatus = await _shareFacebookCallbackPlugin.shareFacebook(
+            type: ShareType.shareLinksFacebook,
+            url: 'https://vtcpay.vn/',
+            quote: 'Happy new year',
+          ) ??
+          'Unknow sharing Facebook Status';
     } catch (e) {
-      print('Error ShareFacebook ' + e.toString());
+      shareFaceStatus = 'Failed to call shareFacebook';
     }
-    // if (!mounted) return;
-    // _facebookIsSuccessed = result;
-    setState(() {});
+    if (!mounted) return;
+    setState(() {
+      _shareFaceStatus = shareFaceStatus;
+    });
   }
 
   @override
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('ShareFacebook CallBack'),
         ),
         body: Center(
           child: Column(
@@ -88,8 +89,8 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(
                 height: 30,
               ),
-              Text('ShareFacebook: ${_facebookIsSuccessed}\n'),
-              Text('_platformVersion: ${_platformVersion}\n'),
+              Text('ShareFacebook Status: $_shareFaceStatus\n'),
+              Text('Platform Version: $_platformVersion\n'),
             ],
           ),
         ),

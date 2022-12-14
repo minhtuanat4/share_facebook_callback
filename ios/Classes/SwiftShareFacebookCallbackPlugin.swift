@@ -1,13 +1,10 @@
 import Flutter
 import UIKit
 import FBSDKShareKit
-import PhotosUI
 
 public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingDelegate{
 
   var result: FlutterResult?
-  var shareURL: String?
-  var documentInteractionController: UIDocumentInteractionController?
 
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "share_facebook_callback", binaryMessenger: registrar.messenger())
@@ -18,14 +15,13 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     self.result = result
     if call.method == "getPlatformVersion" {
-      print("APAddressBook initialization error:\n");
       result("iOS " + UIDevice.current.systemVersion)
     } else if call.method == "facebook_share" {
-      NSLog("APAddressBook initialization error:\n%@", "Minh Tuan");
       if let arguments = call.arguments  as? [String : Any] {
         let type = arguments["type"] as? String ?? "ShareType.more"
         let shareQuote = arguments["quote"] as? String ?? ""
         let shareUrl = arguments["url"] as? String ?? ""
+        let unit8Image = arguments["unit8Image"] as? FlutterStandardTypedData
         _ = arguments["imageName"] as? String ?? ""
 
         switch type {
@@ -33,16 +29,16 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
             shareLinksFacebook(withQuote: shareQuote, withUrl: shareUrl)
             break
           case "ShareType.sharePhotoFacebook":
-            // sharePhotoFacebook(imageUrl, quote, result)
+            sharePhotoFacebook(withUnit8Image: unit8Image, withQuote: shareQuote)
             break
           default:
             self.result?("Method not implemented")
             break
-    
         }
       }
     }
   }
+
 
    public func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
       NSLog("--------------------success")
@@ -74,7 +70,30 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
             }
            
             let shareDialog = ShareDialog(viewController: viewController, content: shareContent, delegate: self)
-                    shareDialog.show()
+                shareDialog.show()
         }
-  }
-}
+    }
+    
+  private  func sharePhotoFacebook(withUnit8Image unit8Image: FlutterStandardTypedData?,  withQuote quote: String?) {
+      
+   DispatchQueue.main.async {
+            guard let data = unit8Image else {
+                    return
+            }
+       
+            let viewController = UIApplication.shared.delegate?.window??.rootViewController
+       
+            let uiImage = UIImage(data: data.data)!
+       
+            let photo = SharePhoto(
+                    image: uiImage,
+                    isUserGenerated: true)
+       
+            let content = SharePhotoContent()
+                content.photos = [photo]
+       
+            let shareDialog = ShareDialog(viewController: viewController, content: content, delegate: self)
+                shareDialog.show()
+            }
+        }
+    }

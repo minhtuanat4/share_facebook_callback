@@ -64,9 +64,10 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
     private String type;
     private String quote;
     private String url;
-    private String imageUrl;
+    private byte[] uint8Image;
     private String imageName;
-@Override
+
+  @Override
   public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
     binding.addActivityResultListener(this);
     activity = binding.getActivity();
@@ -81,13 +82,12 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
   public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
     binding.removeActivityResultListener(this);
     binding.addActivityResultListener(this);
-    activity = binding.getActivity();
   }
 
   @Override
   public void onDetachedFromActivity() {
-    activity = null;
-    binding.removeActivityResultListener(this);
+    // activity = null;
+    // binding.removeActivityResultListener(this);
   }
 
   @Override
@@ -110,21 +110,21 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-        if (call.method.equals("getPlatformVersion")) {
+      System.out.println("--------------------onMethodCall");
+    if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     } else if (call.method.equalsIgnoreCase("facebook_share")){
         type = call.argument("type");
         quote = call.argument("quote");
         url = call.argument("url");
-        imageUrl = call.argument("imageUrl");
+        uint8Image = call.argument("uint8Image");
         imageName = call.argument("imageName");
-
         switch (type) {
           case "ShareType.shareLinksFacebook":
             shareLinksFacebook(url, quote, result);
             break;
           case "ShareType.sharePhotoFacebook":
-            sharePhotoFacebook(imageUrl, quote, result);
+            sharePhotoFacebook(uint8Image, quote, result);
             break;
           default:
             result.notImplemented();
@@ -171,7 +171,8 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
         
     }
 
-    private void sharePhotoFacebook(String imagePath,  String quote,Result result2) {
+    private void sharePhotoFacebook(byte[] uint8Image,  String quote,Result result2) {
+      System.out.println("--------------------sharePhotoFacebook");
         ShareDialog shareDialog = new ShareDialog(activity);
         shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
             @Override
@@ -194,7 +195,7 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
         });
 
         SharePhoto photo = new SharePhoto.Builder()
-              .setBitmap(BitmapFactory.decodeFile(imagePath))
+              .setBitmap(BitmapFactory.decodeByteArray(uint8Image, 0, uint8Image.length))
               .setCaption(quote)
               .build();
         SharePhotoContent content = new SharePhotoContent.Builder()
