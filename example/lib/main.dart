@@ -80,11 +80,6 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-                child: const Text('Bitmap'),
-              ),
-              ElevatedButton(
                 onPressed: () {
                   shareFacebook('https://pub.dev/', 'Flutter');
                 },
