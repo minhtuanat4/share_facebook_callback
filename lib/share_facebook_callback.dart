@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'share_facebook_callback_platform_interface.dart';
 
 enum ShareType { shareLinksFacebook, sharePhotoFacebook, more }
@@ -11,13 +13,13 @@ class ShareFacebookCallback {
       {required ShareType type,
       String? quote,
       String? url,
-      String? bitmapImage,
+      Uint8List? unit8Image,
       String? imageName}) {
     return ShareFacebookCallbackPlatform.instance.shareFacebook(
       type: type.toString(),
       quote: quote,
       url: url,
-      bitmapImage: bitmapImage,
+      unit8Image: unit8Image,
       imageName: imageName,
     );
   }

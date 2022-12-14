@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'share_facebook_callback_method_channel.dart';
@@ -32,7 +34,7 @@ abstract class ShareFacebookCallbackPlatform extends PlatformInterface {
     required String type,
     String? quote,
     String? url,
-    String? bitmapImage,
+    Uint8List? unit8Image,
     String? imageName,
   }) {
     throw UnimplementedError('shareFacebook() has not been implemented.');

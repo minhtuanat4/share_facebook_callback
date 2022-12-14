@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:share_facebook_callback/share_facebook_callback.dart';
 import 'package:share_facebook_callback/share_facebook_callback_platform_interface.dart';
@@ -15,7 +17,7 @@ class MockShareFacebookCallbackPlatform
       {required String type,
       String? quote,
       String? url,
-      String? bitmapImage,
+      Uint8List? unit8Image,
       String? imageName}) {
     // TODO: implement shareFacebook
     throw UnimplementedError();
