@@ -1,6 +1,6 @@
 name: share_facebook_callback
-description: >- 
-      A new Flutter plugin project for sharing contents and photo (Uint8List value) to Facebook.
+description: >-
+      A share_facebook_callback plugin helps us for sharing contents and photo Uint8List value to Facebook.
       Flugin has callback waiting sharing status to Facebook.
 version: 0.0.1
 homepage: https://github.com/minhtuanat4/share_facebook_callback.git
