@@ -1,8 +1,7 @@
 name: share_facebook_callback
-description: A new Flutter plugin project for sharing contents to Facebook.
+description: "A new Flutter plugin project for sharing contents to Facebook."
 version: 0.0.1
 homepage: https://github.com/minhtuanat4/share_facebook_callback.git
-publish_to: http://pub.dev
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
