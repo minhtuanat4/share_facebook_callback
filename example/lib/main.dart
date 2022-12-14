@@ -20,7 +20,6 @@ class _MyAppState extends State<MyApp> {
 
   String _platformVersion = 'Unknown';
   String _shareFaceStatus = 'Unknow status';
-
   @override
   void initState() {
     super.initState();
@@ -52,12 +51,13 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> shareFacebook(String url, String msg) async {
     String shareFaceStatus;
+
     try {
       shareFaceStatus = await _shareFacebookCallbackPlugin.shareFacebook(
-              type: ShareType.shareLinksFacebook,
-              url: 'https://vtcpay.vn/',
-              quote: 'Happy new year',
-              imageUrl: 'example/assets/images/image001.jpeg') ??
+            type: ShareType.shareLinksFacebook,
+            url: 'https://vtcpay.vn/',
+            quote: 'Happy new year',
+          ) ??
           'Unknow sharing Facebook Status';
     } catch (e) {
       shareFaceStatus = 'Failed to call shareFacebook';
@@ -79,6 +79,11 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+                child: const Text('Bitmap'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   shareFacebook('https://pub.dev/', 'Flutter');

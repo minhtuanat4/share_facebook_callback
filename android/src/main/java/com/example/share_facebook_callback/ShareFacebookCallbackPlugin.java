@@ -45,6 +45,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import io.flutter.plugin.common.PluginRegistry;
+import android.graphics.Bitmap;
 
 
 /**
@@ -64,7 +65,7 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
     private String type;
     private String quote;
     private String url;
-    private String imageUrl;
+    private String bitmapImage;
     private String imageName;
 @Override
   public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
@@ -87,11 +88,11 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
   @Override
   public void onDetachedFromActivity() {
     activity = null;
-    binding.removeActivityResultListener(this);
   }
 
   @Override
   public void onAttachedToEngine(FlutterPluginBinding binding) {
+      // FacebookSdk.sdkInitialize();
         onAttachedToEngine(binding.getBinaryMessenger());
     }
 
@@ -116,7 +117,7 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
         type = call.argument("type");
         quote = call.argument("quote");
         url = call.argument("url");
-        imageUrl = call.argument("imageUrl");
+        bitmapImage = call.argument("bitmapImage");
         imageName = call.argument("imageName");
 
         switch (type) {
@@ -124,7 +125,7 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
             shareLinksFacebook(url, quote, result);
             break;
           case "ShareType.sharePhotoFacebook":
-            sharePhotoFacebook(imageUrl, quote, result);
+            sharePhotoFacebook(bitmapImage, quote, result);
             break;
           default:
             result.notImplemented();
@@ -171,7 +172,7 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
         
     }
 
-    private void sharePhotoFacebook(String imagePath,  String quote,Result result2) {
+    private void sharePhotoFacebook(String bitmapImage,  String quote,Result result2) {
         ShareDialog shareDialog = new ShareDialog(activity);
         shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
             @Override
@@ -194,7 +195,7 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
         });
 
         SharePhoto photo = new SharePhoto.Builder()
-              .setBitmap(BitmapFactory.decodeFile(imagePath))
+              .setBitmap(BitmapFactory.decodeFile(bitmapImage))
               .setCaption(quote)
               .build();
         SharePhotoContent content = new SharePhotoContent.Builder()

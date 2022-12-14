@@ -32,7 +32,7 @@ abstract class ShareFacebookCallbackPlatform extends PlatformInterface {
     required String type,
     String? quote,
     String? url,
-    String? imageUrl,
+    String? bitmapImage,
     String? imageName,
   }) {
     throw UnimplementedError('shareFacebook() has not been implemented.');
