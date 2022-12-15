@@ -7,3 +7,6 @@
 ## 0.0.3
 
 * TODO: Update only arm64. Edit description  
+## 1.0.0
+
+* TODO: Edit params FlutterChannel
