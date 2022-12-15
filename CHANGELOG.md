@@ -10,3 +10,6 @@
 ## 1.0.0
 
 * TODO: Edit params FlutterChannel
+## 1.0.1
+
+* TODO: Remove unused FBSDKCoreKit
