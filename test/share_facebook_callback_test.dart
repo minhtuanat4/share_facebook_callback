@@ -17,7 +17,7 @@ class MockShareFacebookCallbackPlatform
       {required String type,
       String? quote,
       String? url,
-      Uint8List? unit8Image,
+      Uint8List? uint8Image,
       String? imageName}) {
     // TODO: implement shareFacebook
     throw UnimplementedError();

@@ -13,13 +13,13 @@ class ShareFacebookCallback {
       {required ShareType type,
       String? quote,
       String? url,
-      Uint8List? unit8Image,
+      Uint8List? uint8Image,
       String? imageName}) {
     return ShareFacebookCallbackPlatform.instance.shareFacebook(
       type: type.toString(),
       quote: quote,
       url: url,
-      unit8Image: unit8Image,
+      uint8Image: uint8Image,
       imageName: imageName,
     );
   }

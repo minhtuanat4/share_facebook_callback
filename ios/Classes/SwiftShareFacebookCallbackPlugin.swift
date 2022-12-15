@@ -21,7 +21,7 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
         let type = arguments["type"] as? String ?? "ShareType.more"
         let shareQuote = arguments["quote"] as? String ?? ""
         let shareUrl = arguments["url"] as? String ?? ""
-        let unit8Image = arguments["unit8Image"] as? FlutterStandardTypedData
+        let uint8Image = arguments["uint8Image"] as? FlutterStandardTypedData
         _ = arguments["imageName"] as? String ?? ""
 
         switch type {
@@ -29,7 +29,7 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
             shareLinksFacebook(withQuote: shareQuote, withUrl: shareUrl)
             break
           case "ShareType.sharePhotoFacebook":
-            sharePhotoFacebook(withUnit8Image: unit8Image, withQuote: shareQuote)
+            sharePhotoFacebook(withuint8Image: uint8Image, withQuote: shareQuote)
             break
           default:
             self.result?("Method not implemented")
@@ -74,10 +74,10 @@ public class SwiftShareFacebookCallbackPlugin: NSObject, FlutterPlugin ,SharingD
         }
     }
     
-  private  func sharePhotoFacebook(withUnit8Image unit8Image: FlutterStandardTypedData?,  withQuote quote: String?) {
+  private  func sharePhotoFacebook(withuint8Image uint8Image: FlutterStandardTypedData?,  withQuote quote: String?) {
       
    DispatchQueue.main.async {
-            guard let data = unit8Image else {
+            guard let data = uint8Image else {
                     return
             }
        
