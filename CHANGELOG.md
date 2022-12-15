@@ -4,3 +4,6 @@
 ## 0.0.2
 
 * TODO: Update arm64  
+## 0.0.3
+
+* TODO: Update only arm64. Edit description  
