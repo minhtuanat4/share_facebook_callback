@@ -2,7 +2,7 @@ name: share_facebook_callback
 description: >-
       share_facebook_callback plugin helps us for sharing contents and photo Uint8List value to Facebook.
       Flugin has callback waiting sharing status to Facebook.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/minhtuanat4/share_facebook_callback.git
 
 environment:

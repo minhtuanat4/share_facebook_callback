@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'share_facebook_callback'
-  s.version          = '0.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'A new Flutter plugin project.'
   s.description      = <<-DESC
 A new Flutter plugin project.
@@ -19,7 +19,7 @@ A new Flutter plugin project.
   s.platform = :ios, '11.0'
 
   # Flutter.framework does contain a  x86_64 i386 arm64 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64 i386 arm64' }
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64' }
   # s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   # s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.swift_version = '5.0'

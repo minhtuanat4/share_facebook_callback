@@ -13,3 +13,6 @@
 ## 1.0.1
 
 * TODO: Remove unused FBSDKCoreKit
+## 1.0.2
+
+* TODO: Update s.pod_target_xcconfig
