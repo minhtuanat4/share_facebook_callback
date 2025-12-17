@@ -16,3 +16,6 @@
 ## 1.0.2
 
 * TODO: Update s.pod_target_xcconfig
+## 1.0.3
+
+* TODO: Update Dart version 3.5.4, Flutter version 3.24.5 
