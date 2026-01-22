@@ -178,19 +178,19 @@ public class ShareFacebookCallbackPlugin implements FlutterPlugin, MethodCallHan
             @Override
             public void onSuccess(Sharer.Result result) {
                 System.out.println("--------------------success");
-                result2.success(true);
+                result2.success("success");
             }
 
             @Override
             public void onCancel() {
                 System.out.println("-----------------cancel");
-                result2.success(false);
+                result2.success("cancel");
             }
 
             @Override
             public void onError(FacebookException error) {
                 System.out.println("---------------error");
-                result2.success(false);
+                result2.success("cancel");
             }
         });
 
